@@ -22,9 +22,11 @@ export class TextEditorComponent implements OnInit {
   ngOnInit(): void {}
   @HostListener('window:keydown.enter', ['$event.target.innerHTML'])
   onKeyPressHandler() {
-    // debugger;
+    debugger;
     let p = this.renderer.createElement('p');
-    // this.renderer.appendChild(p, event.target.innerHTML);
-    this.renderer.appendChild(this.divMessages.nativeElement, p);
+    let text = this.renderer.createText(
+      this.divMessages.nativeElement.innerHTML
+    );
+    this.renderer.appendChild(p, text);
   }
 }
