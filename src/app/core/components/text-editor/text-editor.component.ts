@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   OnInit,
   Output,
@@ -14,15 +15,18 @@ import {
   styleUrls: ['./text-editor.component.sass'],
 })
 export class TextEditorComponent implements OnInit {
-  @Output() prompts:
+  @Output() textEmit: EventEmitter<string> = new EventEmitter<string>();
+
   @ViewChild('divMessages', { read: ElementRef })
   private divMessages!: ElementRef;
-  selectedText: string = '';
 
+  selectedText: string = '';
   text: string = '';
+
   constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {}
+
   @HostListener('window:keydown.enter', ['$event.target.innerHTML'])
   onKeyPressHandler() {
     let p = this.renderer.createElement('p');
@@ -31,9 +35,8 @@ export class TextEditorComponent implements OnInit {
     );
     this.renderer.appendChild(p, text);
   }
+
   selectText() {
     this.selectedText = window.getSelection()!.toString();
   }
-
-
 }
