@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -13,8 +14,10 @@ import {
   styleUrls: ['./text-editor.component.sass'],
 })
 export class TextEditorComponent implements OnInit {
+  @Output() prompts:
   @ViewChild('divMessages', { read: ElementRef })
   private divMessages!: ElementRef;
+  selectedText: string = '';
 
   text: string = '';
   constructor(private renderer: Renderer2) {}
@@ -22,11 +25,15 @@ export class TextEditorComponent implements OnInit {
   ngOnInit(): void {}
   @HostListener('window:keydown.enter', ['$event.target.innerHTML'])
   onKeyPressHandler() {
-    debugger;
     let p = this.renderer.createElement('p');
     let text = this.renderer.createText(
       this.divMessages.nativeElement.innerHTML
     );
     this.renderer.appendChild(p, text);
   }
+  selectText() {
+    this.selectedText = window.getSelection()!.toString();
+  }
+
+
 }

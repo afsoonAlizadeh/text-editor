@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  HostBinding,
+  ViewEncapsulation,
+} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { IconName, iconPack } from './../../types/icon';
 
 @Component({
   selector: 'app-icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.sass']
+  template: '',
+  styleUrls: ['icon.component.sass'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class IconComponent implements OnInit {
+export class IconComponent {
+  @Input() name: IconName | null = null;
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) {}
 
-  ngOnInit(): void {
+  @HostBinding('innerHTML') get html() {
+    return this.name
+      ? this.sanitizer.bypassSecurityTrustHtml(iconPack[this.name])
+      : '';
   }
-
 }

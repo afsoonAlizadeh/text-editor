@@ -1,4 +1,4 @@
-import { BarList } from './../../../types/BarList';
+import { BarList } from './../../../types/barList';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -7,17 +7,22 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./bar-list.component.sass'],
 })
 export class BarListComponent implements OnInit {
-  @Input() barList: BarList[] = [
-    { name: 'undo', icon: 'admin' },
-    { name: 'bold', icon: 'admin' },
-    { name: 'italic', icon: 'admin' },
-    { name: 'underline', icon: 'admin' },
-    { name: 'left', icon: 'admin' },
-    { name: 'right', icon: 'admin' },
-    { name: 'center', icon: 'admin' },
-    { name: 'color', icon: 'admin' },
+  barList: BarList[] = [
+    { name: 'undo', icon: 'undo' },
+    { name: 'bold', icon: 'bold' },
+    { name: 'italic', icon: 'italic' },
+    { name: 'underline', icon: 'underline' },
+    { name: 'left', icon: 'left' },
+    { name: 'right', icon: 'right' },
+    { name: 'center', icon: 'center' },
+    { name: 'color', icon: 'palette' },
   ];
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  trackByBarList(index: number) {
+    return this.barList ? this.barList[index] : 0;
+  }
 }

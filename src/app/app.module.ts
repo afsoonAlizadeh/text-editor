@@ -1,14 +1,14 @@
+import { IconModule } from './icon/Icon.module';
+import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TextEditorComponent } from './core/components/text-editor/text-editor.component';
-import { IconComponent } from './icon/component/icon/icon.component';
 
 @NgModule({
-  declarations: [AppComponent, IconComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, CoreModule, IconModule],
   providers: [],
   bootstrap: [AppComponent],
 })
